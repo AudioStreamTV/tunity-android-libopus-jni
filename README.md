@@ -26,3 +26,5 @@ Target architectures are defined as:
 ```
 architectures=("arm64-v8a" "armeabi-v7a" "x86_64" "x86")
 ```
+
+For more information, refer to https://github.com/xiph/opus/blob/main/cmake/README.md.
