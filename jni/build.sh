@@ -1,5 +1,8 @@
 #!/bin/bash
 
+BUILD_TYPE="Release" # Change to Debug if needed
+MIN_ANDROID_API_VERSION="29"
+
 original_dir=$(pwd)
 architectures=("arm64-v8a" "armeabi-v7a" "x86_64" "x86")
 
@@ -19,7 +22,12 @@ check_env_var() {
 build_opus_for_arch() {
   local build_arch=$1
   clean_build_dir
-  cmake -DANDROID_ABI=$build_arch -DANDROID_PLATFORM=android-29 -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK_ROOT/$NDK_VERSION/build/cmake/android.toolchain.cmake ..
+  cmake \
+    -DANDROID_ABI=$build_arch \
+    -DANDROID_PLATFORM=android-$MIN_ANDROID_API_VERSION \
+    -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK_ROOT/build/cmake/android.toolchain.cmake \
+    -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
+    ..
   make -j
   mkdir $build_arch
   mv libtunityopus.so $build_arch
@@ -28,7 +36,6 @@ build_opus_for_arch() {
 # Check required environment variables
 check_env_var "ANDROID_SDK_ROOT" "$ANDROID_SDK_ROOT"
 check_env_var "ANDROID_NDK_ROOT" "$ANDROID_NDK_ROOT"
-check_env_var "NDK_VERSION" "$NDK_VERSION"
 
 # Prepare build directory if it doesn't exist yet and enter it
 rm -rf build

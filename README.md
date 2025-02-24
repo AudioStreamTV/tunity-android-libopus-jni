@@ -5,22 +5,15 @@ This allows for a fully automated future upgrade of libopus, requiring only copy
 build.sh
 ```
 
-Then, you can either manually copy all newly built libtunityopus.so into the Tunity tree, or simply run:
-```
-deploy.sh
-```
+Then, you nedd to manually copy all newly built libtunityopus.so into the Tunity tree.
 
 All scripts will inform whether a required environment variable is missing (not exported).  Here's the current list:
 ```
 # build
 $ANDROID_NDK_ROOT
-$NDK_VERSION
-
-# deploy
-$TUNITY_ROOT
 ```
 
-To change the minimum Android API version, change the value of _ANDROID_PLATFORM_ in `build_opus_for_arch()`.
+To change the minimum Android API version, change the value of _MIN_ANDROID_API_VERSION_.
 
 Target architectures are defined as:
 ```

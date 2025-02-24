@@ -23,7 +23,7 @@ extern "C" {
 #endif
 
 JNIEXPORT jlong JNICALL
-Java_com_tunityapp_tunityapp_OpusDecoder_decoderCreate(JNIEnv * env, jobject obj, jint sampleRate, jint channels)
+Java_com_ispot_tunity_core_opus_AndroidOpusDecoder_decoderCreate(JNIEnv * env, jobject obj, jint sampleRate, jint channels)
 {
     int error = 0;
     LOGV("creating decoder sample rate: %d channels %d", sampleRate, channels);
@@ -38,7 +38,7 @@ Java_com_tunityapp_tunityapp_OpusDecoder_decoderCreate(JNIEnv * env, jobject obj
 }
 
 JNIEXPORT jint JNICALL
-Java_com_tunityapp_tunityapp_OpusDecoder_decode(JNIEnv * env, jobject obj, jlong opusDecoder, jbyteArray inData, jshortArray pcm, jint frameSize, jint decodeFec)
+Java_com_ispot_tunity_core_opus_AndroidOpusDecoder_decode(JNIEnv * env, jobject obj, jlong opusDecoder, jbyteArray inData, jshortArray pcm, jint frameSize, jint decodeFec)
 {
     LOGV("Opus decode. opus decoder: %lld. framesize: %d decodefec: %d", opusDecoder, frameSize, decodeFec);
     OpusDecoder *st = (OpusDecoder *)(intptr_t)(jlong)opusDecoder;
@@ -84,7 +84,7 @@ Java_com_tunityapp_tunityapp_OpusDecoder_decode(JNIEnv * env, jobject obj, jlong
 }
 
 JNIEXPORT void JNICALL
-Java_com_tunityapp_tunityapp_OpusDecoder_decoderDestroy(JNIEnv * env, jobject obj, jlong opusDecoder)
+Java_com_ispot_tunity_core_opus_AndroidOpusDecoder_decoderDestroy(JNIEnv * env, jobject obj, jlong opusDecoder)
 {
     OpusDecoder *st = (OpusDecoder *)(intptr_t)(jlong)opusDecoder;
     LOGV("decoder destroy. st = %p", st);
